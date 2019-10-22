@@ -121,5 +121,5 @@ resource "aws_security_group" "mssql_sg" {
 }
 
 output "out_mssql_sg_id" {
-  value = "${aws_security_group.mssql_sg}"
+  value = "${aws_security_group.mssql_sg.id}"
 }
