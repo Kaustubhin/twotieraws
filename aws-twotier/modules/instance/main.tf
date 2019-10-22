@@ -16,7 +16,7 @@ resource "aws_instance" "web_server" {
 }
 
 resource "aws_instance" "db_server" {
-  ami = "ami-0dc2d2411eb47f9b3"
+  ami = "ami-0e5311d6d20d31efa"
   instance_type = "t2.micro"
   subnet_id = "${var.prv_sub_1}"
   key_name = "myserverkey"
