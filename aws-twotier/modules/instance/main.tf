@@ -20,7 +20,7 @@ resource "aws_instance" "db_server" {
   instance_type = "t2.micro"
   subnet_id = "${var.prv_sub_1}"
   key_name = "myserverkey"
-  vpc_security_group_ids = var.mssql_sg[0]
+  vpc_security_group_ids = [var.mssql_sg]
 
   tags = {
     Name = "DBServer"
