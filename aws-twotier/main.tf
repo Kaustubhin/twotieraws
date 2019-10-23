@@ -27,6 +27,4 @@ module "instance" {
   lb_sg = "${module.security-groups.out_elb_sg_id}"
   pub_sub_2 = "${module.vpc.out_pub_sub2_id}"
   key_pair_path = "${var.key_pair_path}"
-  user ="${var.ADMIN_USER}"
-  password = "${var.ADMIN_PASSWORD}"
 }
