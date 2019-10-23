@@ -1,7 +1,3 @@
-/*resource "aws_key_pair" "my_server_key" {
-  key_name = "myserverkey"
-  public_key = "${file("${var.key_pair_path}")}"
-}*/
 
 resource "aws_instance" "web_server" {
   ami                    = "ami-0e5311d6d20d31efa"
@@ -9,37 +5,6 @@ resource "aws_instance" "web_server" {
   subnet_id              = "${var.pub_sub_1}"
   key_name               = "myserverkey"
   vpc_security_group_ids = ["${var.webserver_sg}"]
-  user_data              = <<EOF
-<powershell>
-net user ${var.ADMIN_USER} ‘${var.ADMIN_PASSWORD}’ /add /y
-net localgroup administrators ${var.ADMIN_USER} /add
-
-winrm quickconfig -q
-winrm set winrm/config/winrs ‘@{MaxMemoryPerShellMB=”300″}’
-winrm set winrm/config ‘@{MaxTimeoutms=”1800000″}’
-winrm set winrm/config/service ‘@{AllowUnencrypted=”true”}’
-winrm set winrm/config/service/auth ‘@{Basic=”true”}’
-
-netsh advfirewall firewall add rule name=”WinRM 5985″ protocol=TCP dir=in localport=5985 action=allow
-netsh advfirewall firewall add rule name=”WinRM 5986″ protocol=TCP dir=in localport=5986 action=allow
-
-net stop winrm
-sc.exe config winrm start=auto
-net start winrm
-</powershell>
-EOF
-
-  tags = {
-    Name = "WebServer"
-  }
-}
-
-resource "aws_instance" "db_server" {
-  ami                    = "ami-0e5311d6d20d31efa"
-  instance_type          = "t2.micro"
-  subnet_id              = "${var.prv_sub_1}"
-  key_name               = "myserverkey"
-  vpc_security_group_ids = ["${var.mssql_sg}"]
   user_data              = <<EOF
 <powershell>
 net user ${var.ADMIN_USER} ‘${var.ADMIN_PASSWORD}’ /add /y
@@ -89,7 +54,37 @@ Enable-WindowsOptionalFeature -Online -FeatureName IIS-ApplicationInit
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ISAPIExtensions
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ISAPIFilter
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpCompressionStatic
+</powershell>
+EOF
 
+  tags = {
+    Name = "WebServer"
+  }
+}
+
+resource "aws_instance" "db_server" {
+  ami                    = "ami-0e5311d6d20d31efa"
+  instance_type          = "t2.micro"
+  subnet_id              = "${var.prv_sub_1}"
+  key_name               = "myserverkey"
+  vpc_security_group_ids = ["${var.mssql_sg}"]
+  user_data              = <<EOF
+<powershell>
+net user ${var.ADMIN_USER} ‘${var.ADMIN_PASSWORD}’ /add /y
+net localgroup administrators ${var.ADMIN_USER} /add
+
+winrm quickconfig -q
+winrm set winrm/config/winrs ‘@{MaxMemoryPerShellMB=”300″}’
+winrm set winrm/config ‘@{MaxTimeoutms=”1800000″}’
+winrm set winrm/config/service ‘@{AllowUnencrypted=”true”}’
+winrm set winrm/config/service/auth ‘@{Basic=”true”}’
+
+netsh advfirewall firewall add rule name=”WinRM 5985″ protocol=TCP dir=in localport=5985 action=allow
+netsh advfirewall firewall add rule name=”WinRM 5986″ protocol=TCP dir=in localport=5986 action=allow
+
+net stop winrm
+sc.exe config winrm start=auto
+net start winrm
 </powershell>
 EOF
 
