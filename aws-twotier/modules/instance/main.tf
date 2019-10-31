@@ -5,7 +5,18 @@ resource "aws_instance" "web_server" {
   subnet_id              = "${var.pub_sub_1}"
   key_name               = "myserverkey"
   vpc_security_group_ids = ["${var.webserver_sg}"]
-  user_data              = <<EOF
+  root_block_device {
+    volume_type           = "gp2"
+    volume_size           = "31"
+    delete_on_termination = "true"
+  }
+  ebs_block_device {
+    device_name           = "/dev/xvdb"
+    volume_size           = 2
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+  user_data = <<EOF
 <powershell>
 net user ${var.ADMIN_USER} ‘${var.ADMIN_PASSWORD}’ /add /y
 net localgroup administrators ${var.ADMIN_USER} /add
@@ -68,7 +79,18 @@ resource "aws_instance" "db_server" {
   subnet_id              = "${var.prv_sub_1}"
   key_name               = "myserverkey"
   vpc_security_group_ids = ["${var.mssql_sg}"]
-  user_data              = <<EOF
+  root_block_device {
+    volume_type           = "gp2"
+    volume_size           = "60"
+    delete_on_termination = "true"
+  }
+  ebs_block_device {
+    device_name           = "/dev/xvdb"
+    volume_size           = 2
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+  user_data = <<EOF
 <powershell>
 net user ${var.ADMIN_USER} ‘${var.ADMIN_PASSWORD}’ /add /y
 net localgroup administrators ${var.ADMIN_USER} /add
