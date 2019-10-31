@@ -3,8 +3,7 @@ terraform {
   backend "s3" {
     bucket         = "s3-bucket-name-adodemo-tfstate"
     key            = "terraform.tfstate"
-    region         = "us-west-2"
-    #dynamodb_table = "aws-locks"
+    region         = "${var.aws_region}"
     encrypt        = true
   }
 }
@@ -41,7 +40,7 @@ module "instance" {
   key_pair_path = "${var.key_pair_path}"
 }
 
-module "ado_backend" {
+/*module "ado_backend" {
   source = "./modules/ado_backend"
 
   name_of_s3_bucket            = "s3-bucket-name-adodemo-tfstate"
@@ -51,4 +50,4 @@ module "ado_backend" {
   aws_iam_policy_permits_name  = "ADOIamPolicyPermitsDemo"
   aws_iam_policy_assume_name   = "ADOIamPolicyAssumeDemo"
   
-}
+}*/
