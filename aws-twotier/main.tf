@@ -4,7 +4,7 @@ terraform {
     bucket         = "s3-bucket-name-adodemo-tfstate"
     key            = "terraform.tfstate"
     region         = "us-west-2"
-    dynamodb_table = "aws-locks"
+    #dynamodb_table = "aws-locks"
     encrypt        = true
   }
 }
