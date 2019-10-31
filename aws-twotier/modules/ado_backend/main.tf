@@ -1,6 +1,6 @@
 
 
-/*# Build an S3 bucket to store TF state
+# Build an S3 bucket to store TF state
 resource "aws_s3_bucket" "state_bucket" {
   bucket = "${var.name_of_s3_bucket}"
 
@@ -71,7 +71,7 @@ POLICY
 resource "aws_iam_user_policy_attachment" "iam_user_assume_attach" {
   user       = "${aws_iam_user.ado_iam_user.name}"
   policy_arn = "${aws_iam_policy.ado_iam_policy.arn}"
-}*/
+}
 # Build a DynamoDB to use for terraform state locking
 resource "aws_dynamodb_table" "tf_lock_state" {
   name         = "${var.dynamo_db_table_name}"

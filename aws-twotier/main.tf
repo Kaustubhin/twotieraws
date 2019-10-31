@@ -44,11 +44,11 @@ module "instance" {
 module "ado_backend" {
   source = "./modules/ado_backend"
 
-  #name_of_s3_bucket            = "s3-bucket-name-adodemo-tfstate"
+  name_of_s3_bucket            = "s3-bucket-name-adodemo-tfstate"
   dynamo_db_table_name         = "aws-locks"
-  #iam_user_name                = "ADOIamUserDemo"
-  #ado_iam_role_name            = "ADOIamRoleDemo"
-  #aws_iam_policy_permits_name  = "ADOIamPolicyPermitsDemo"
-  #aws_iam_policy_assume_name   = "ADOIamPolicyAssumeDemo"
+  iam_user_name                = "ADOIamUserDemo"
+  ado_iam_role_name            = "ADOIamRoleDemo"
+  aws_iam_policy_permits_name  = "ADOIamPolicyPermitsDemo"
+  aws_iam_policy_assume_name   = "ADOIamPolicyAssumeDemo"
   
 }
