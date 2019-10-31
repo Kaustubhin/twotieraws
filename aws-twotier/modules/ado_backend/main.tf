@@ -73,7 +73,7 @@ resource "aws_iam_user_policy_attachment" "iam_user_assume_attach" {
   policy_arn = "${aws_iam_policy.ado_iam_policy.arn}"
 }
 # Build a DynamoDB to use for terraform state locking
-resource "aws_dynamodb_table" "tf_lock_state" {
+/*resource "aws_dynamodb_table" "tf_lock_state" {
   name         = "${var.dynamo_db_table_name}"
 
   # Pay per request is cheaper for low-i/o applications, like our TF lock state
@@ -92,4 +92,4 @@ resource "aws_dynamodb_table" "tf_lock_state" {
     Name    = "${var.dynamo_db_table_name}"
     BuiltBy = "Terraform"
   }
-}
+}*/
