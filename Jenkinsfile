@@ -13,7 +13,7 @@ pipeline {
                     [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'sparse/']]]
                 ],
                 submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: 'none',url: 'git@https://github.com/Kaustubhin/twotieraws.git']]])
+                userRemoteConfigs: [[credentialsId: 'none',url: 'http://github.com/Kaustubhin/twotieraws.git']]])
 
             }
         }
