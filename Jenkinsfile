@@ -1,14 +1,7 @@
 pipeline {
     agent none
-    stages
-    {
-        stage("Checkout code")
-        {
-            agent
-            {
-                lable ("master")
-            }
-            steups
+
+            node ("master")
             {
                 checkout([$class: 'GitSCM', 
                 branches: [[name: '*/master']],
@@ -17,12 +10,9 @@ pipeline {
                     [$class: 'SparseCheckoutPaths',  sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'sparse/']]]
                 ],
                 submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: 'someID',url: 'git@https://github.com/Kaustubhin/twotieraws.git']]])
+                userRemoteConfigs: [[credentialsId: 'none',url: 'git@https://github.com/Kaustubhin/twotieraws.git']]])
 
             }
                 
-        }
-
-    }
 }
 
