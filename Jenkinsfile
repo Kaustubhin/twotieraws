@@ -23,14 +23,8 @@ pipeline {
         
         always
         {
-            node('master')
-            {
-                dir('deletetodir')
-                {
-                deleteDir()
-                } 
             
-            }
+                deleteDir()
 
         }
     }   
