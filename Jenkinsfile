@@ -1,7 +1,10 @@
 pipeline {
     agent none
-
-            node ("master")
+    stages
+    {
+        stage("Checkout code")
+        {
+            steps
             {
                 checkout([$class: 'GitSCM', 
                 branches: [[name: '*/master']],
@@ -13,6 +16,7 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: 'none',url: 'git@https://github.com/Kaustubhin/twotieraws.git']]])
 
             }
-                
+        }
+    }   
 }
 
