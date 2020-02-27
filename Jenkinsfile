@@ -27,7 +27,7 @@ pipeline {
             {
                 dir('deletetodir')
                 {
-                deleteDir('sparse')
+                deleteDir()
                 } 
             
             }
