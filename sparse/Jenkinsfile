@@ -6,7 +6,7 @@ pipeline {
         {
             steps
             {
-                printls "Hello World !!"
+                println "Hello World !!"
 
             }
         }
