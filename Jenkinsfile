@@ -25,9 +25,9 @@ pipeline {
         {
             node('master')
             {
-                dir(deletetodir)
+                dir('deletetodir')
                 {
-                deleteDir(sparse)
+                deleteDir('sparse')
                 } 
             
             }
