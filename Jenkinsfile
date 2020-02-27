@@ -17,6 +17,22 @@ pipeline {
 
             }
         }
+    }
+
+    post{
+        
+        always
+        {
+            node('master')
+            {
+                dir(deletetodir)
+                {
+                deleteDir()
+                } 
+            
+            }
+
+        }
     }   
 }
 
